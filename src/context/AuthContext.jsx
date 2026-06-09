@@ -85,12 +85,8 @@ export function AuthProvider({ children }) {
     }
   }, [user])
 
-  const login = useCallback((email, role) => {
-    // Find matching demo user by email, or by role if email doesn't match
-    let found = DEMO_USERS.find((u) => u.email === email && u.rol === role)
-    if (!found) {
-      found = DEMO_USERS.find((u) => u.rol === role)
-    }
+  const login = useCallback((email) => {
+    const found = DEMO_USERS.find((u) => u.email === email)
     if (!found) return false
 
     const sessionUser = { ...found }

@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { ROLE_LABELS } from '../../data/permissions'
-import { BookOpen, Mail, Lock, ChevronDown, Eye, EyeOff, Library } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, Library } from 'lucide-react'
 import './LoginPage.css'
 
 export default function LoginPage() {
@@ -10,7 +9,6 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [role, setRole] = useState('estudiante')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -20,8 +18,8 @@ export default function LoginPage() {
 
   const emailDomain = email.includes('@') ? email.split('@')[1] : null
   const domainValid = emailDomain === 'universidad.cl'
-  const domainInvalid = emailDomain !== null && emailDomain !== '' && !domainValid
-    && !('universidad.cl'.startsWith(emailDomain))
+  const domainInvalid = emailDomain !== null && emailDomain !== ''
+    && !domainValid && !('universidad.cl'.startsWith(emailDomain))
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -43,13 +41,11 @@ export default function LoginPage() {
     }
 
     setLoading(true)
-
-    // Brief delay to feel real
     await new Promise((resolve) => setTimeout(resolve, 800))
 
-    const success = login(email, role)
+    const success = login(email)
     if (!success) {
-      setError('No se pudo iniciar sesión. Intente nuevamente.')
+      setError('Usuario no encontrado. Verifique su correo institucional.')
       setLoading(false)
     }
   }
@@ -150,42 +146,6 @@ export default function LoginPage() {
                   }
                 </button>
               </div>
-            </div>
-
-            {/* Role selector */}
-            <div className="login-field">
-              <label className="login-label" htmlFor="login-role">
-                Rol de acceso
-              </label>
-              <div className="login-select-wrapper">
-                <span className="login-select-icon">
-                  <BookOpen size={17} strokeWidth={1.8} />
-                </span>
-                <select
-                  id="login-role"
-                  className="login-select"
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                  disabled={loading}
-                >
-                  {Object.entries(ROLE_LABELS).map(([key, label]) => (
-                    <option key={key} value={key}>{label}</option>
-                  ))}
-                </select>
-                <span className="login-select-chevron">
-                  <ChevronDown size={17} strokeWidth={1.8} />
-                </span>
-              </div>
-            </div>
-
-            {/* Demo note */}
-            <div className="login-demo-note">
-              <span className="login-demo-note-icon">
-                <BookOpen size={15} strokeWidth={1.8} />
-              </span>
-              <span>
-                Modo demostración — seleccione un rol para explorar el sistema
-              </span>
             </div>
 
             {/* Error */}
