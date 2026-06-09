@@ -1,0 +1,40 @@
+/* ============================================
+   RemovalRequestsPage — UNILIB Digital
+   Removal/decommission requests management
+   ============================================ */
+
+.removal-page {
+  padding: var(--space-6);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.removal-page h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  color: var(--color-text);
+  margin: 0 0 var(--space-6);
+}
+
+/* ─── Actions cell ─── */
+
+.removal-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ─── Status-only cell ─── */
+
+.removal-status-cell {
+  display: flex;
+  align-items: center;
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 768px) {
+  .removal-page {
+    padding: var(--space-4);
+  }
+}

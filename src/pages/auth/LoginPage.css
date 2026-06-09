@@ -1,0 +1,476 @@
+/* ============================================
+   LoginPage — UNILIB Digital
+   Split layout: branding panel + form panel
+   ============================================ */
+
+.login-page {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-bg);
+}
+
+/* ─── Left Panel: Branding ─── */
+
+.login-branding {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-16) var(--space-10);
+  background: var(--color-primary-dark);
+  color: #fff;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Animated gradient overlay */
+.login-branding::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(45, 106, 79, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(212, 163, 115, 0.12) 0%, transparent 60%);
+  animation: brandingShift 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes brandingShift {
+  0%   { opacity: 0.6; transform: scale(1) translate(0, 0); }
+  50%  { opacity: 1;   transform: scale(1.08) translate(-2%, 3%); }
+  100% { opacity: 0.7; transform: scale(1.02) translate(2%, -2%); }
+}
+
+/* Book-spine decorative elements */
+.login-branding::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    /* vertical spines — left cluster */
+    linear-gradient(to right, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 100%) no-repeat 8% 15% / 3px 120px,
+    linear-gradient(to right, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.05) 100%) no-repeat 10% 12% / 5px 140px,
+    linear-gradient(to right, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 100%) no-repeat 12.5% 18% / 4px 100px,
+    linear-gradient(to right, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 100%) no-repeat 14% 10% / 3px 155px,
+    linear-gradient(to right, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.025) 100%) no-repeat 16% 14% / 6px 115px,
+
+    /* vertical spines — right cluster */
+    linear-gradient(to right, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 100%) no-repeat 84% 60% / 4px 130px,
+    linear-gradient(to right, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 100%) no-repeat 86.5% 55% / 3px 150px,
+    linear-gradient(to right, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.05) 100%) no-repeat 88.5% 62% / 5px 110px,
+    linear-gradient(to right, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 100%) no-repeat 91% 58% / 4px 140px,
+
+    /* horizontal spines — bottom cluster (lying flat) */
+    linear-gradient(to bottom, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 100%) no-repeat 25% 85% / 100px 3px,
+    linear-gradient(to bottom, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.04) 100%) no-repeat 22% 87.5% / 120px 4px,
+    linear-gradient(to bottom, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.025) 100%) no-repeat 28% 90% / 90px 3px,
+
+    /* scattered small rectangles — like floating books */
+    linear-gradient(to right, rgba(212,163,115,0.06) 0%, rgba(212,163,115,0.06) 100%) no-repeat 70% 25% / 28px 36px,
+    linear-gradient(to right, rgba(212,163,115,0.04) 0%, rgba(212,163,115,0.04) 100%) no-repeat 30% 72% / 32px 24px,
+    linear-gradient(to right, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 100%) no-repeat 55% 88% / 22px 30px;
+}
+
+.login-branding-content {
+  position: relative;
+  z-index: 1;
+}
+
+.login-branding-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-8);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(4px);
+  color: var(--color-accent);
+}
+
+.login-branding-title {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  margin-bottom: var(--space-2);
+  color: #fff;
+}
+
+.login-branding-subtitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--color-accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-8);
+}
+
+.login-branding-divider {
+  width: 48px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 auto var(--space-6);
+  border: none;
+}
+
+.login-branding-tagline {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* ─── Right Panel: Form ─── */
+
+.login-form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-16) var(--space-10);
+  background: var(--color-bg);
+}
+
+.login-form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-form-heading {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.login-form-subheading {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+/* ─── Form Fields ─── */
+
+.login-field {
+  margin-bottom: var(--space-5);
+}
+
+.login-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.login-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-input-icon {
+  position: absolute;
+  left: var(--space-3);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: color var(--transition-base);
+  display: flex;
+  align-items: center;
+}
+
+.login-input-wrapper:focus-within .login-input-icon {
+  color: var(--color-primary);
+}
+
+.login-input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4) var(--space-3) calc(var(--space-3) + 20px + var(--space-2));
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.login-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.login-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-50);
+}
+
+.login-input.has-error {
+  border-color: var(--color-danger);
+}
+
+.login-input.has-error:focus {
+  box-shadow: 0 0 0 3px var(--color-danger-light);
+}
+
+/* Password toggle */
+.login-password-toggle {
+  position: absolute;
+  right: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-1);
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.login-password-toggle:hover {
+  color: var(--color-text-secondary);
+}
+
+.login-password-toggle:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 1px;
+}
+
+/* Input with right button needs right padding */
+.login-input--with-toggle {
+  padding-right: calc(var(--space-3) + 20px + var(--space-3));
+}
+
+/* ─── Domain hint ─── */
+
+.login-domain-hint {
+  font-size: var(--text-xs);
+  margin-top: var(--space-1);
+  min-height: 1.2em;
+  transition: color var(--transition-fast);
+}
+
+.login-domain-hint--valid {
+  color: var(--color-success);
+}
+
+.login-domain-hint--invalid {
+  color: var(--color-danger);
+}
+
+/* ─── Select (role) ─── */
+
+.login-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-select {
+  width: 100%;
+  padding: var(--space-3) calc(var(--space-3) + 20px + var(--space-2)) var(--space-3) calc(var(--space-3) + 20px + var(--space-2));
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.login-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-50);
+}
+
+.login-select-icon {
+  position: absolute;
+  left: var(--space-3);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  transition: color var(--transition-base);
+}
+
+.login-select-wrapper:focus-within .login-select-icon {
+  color: var(--color-primary);
+}
+
+.login-select-chevron {
+  position: absolute;
+  right: var(--space-3);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+/* ─── Demo note ─── */
+
+.login-demo-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-6);
+  background: var(--color-primary-50);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.login-demo-note-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--color-primary);
+}
+
+/* ─── Error message ─── */
+
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  background: var(--color-danger-light);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-danger);
+  animation: loginErrorIn 0.3s ease;
+}
+
+@keyframes loginErrorIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Submit button ─── */
+
+.login-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.login-submit:hover:not(:disabled) {
+  background: var(--color-primary-light);
+  box-shadow: var(--shadow-md);
+}
+
+.login-submit:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.login-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.login-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: loginSpin 0.6s linear infinite;
+}
+
+@keyframes loginSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Footer ─── */
+
+.login-footer {
+  margin-top: var(--space-8);
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* ─── Mobile: single column ─── */
+
+@media (max-width: 900px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .login-branding {
+    padding: var(--space-8) var(--space-6);
+    min-height: auto;
+  }
+
+  .login-branding::after {
+    display: none;
+  }
+
+  .login-branding-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--space-4);
+  }
+
+  .login-branding-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-1);
+  }
+
+  .login-branding-subtitle {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-4);
+  }
+
+  .login-branding-divider,
+  .login-branding-tagline {
+    display: none;
+  }
+
+  .login-form-panel {
+    padding: var(--space-8) var(--space-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form-panel {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .login-form-heading {
+    font-size: var(--text-2xl);
+  }
+}

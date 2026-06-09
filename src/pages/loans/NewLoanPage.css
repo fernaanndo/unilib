@@ -1,0 +1,525 @@
+/* ============================================
+   NewLoanPage — UNILIB Digital
+   3-step wizard for creating loans
+   ============================================ */
+
+.new-loan-page {
+  padding: var(--space-6);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* --- Header --- */
+
+.new-loan-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.new-loan-header h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* --- Steps indicator --- */
+
+.new-loan-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  margin-bottom: var(--space-8);
+  padding: var(--space-4) 0;
+}
+
+.new-loan-steps__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.new-loan-steps__line {
+  width: 60px;
+  height: 2px;
+  background: var(--color-border);
+  margin-right: var(--space-2);
+  transition: background var(--transition-base);
+}
+
+.new-loan-steps__line--done {
+  background: var(--color-primary);
+}
+
+.new-loan-steps__circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border: 2px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.new-loan-steps__circle--active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.new-loan-steps__circle--done {
+  border-color: var(--color-primary);
+  background: var(--color-primary-50);
+  color: var(--color-primary);
+}
+
+.new-loan-steps__label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  transition: color var(--transition-base);
+}
+
+.new-loan-steps__label--active {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* --- Step content --- */
+
+.new-loan-step {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.new-loan-step__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--color-text);
+  margin: 0 0 var(--space-5) 0;
+}
+
+.new-loan-step__search {
+  margin-bottom: var(--space-5);
+  max-width: 480px;
+}
+
+.new-loan-step__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+/* --- User list --- */
+
+.new-loan-user-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.new-loan-user-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  background: var(--color-bg);
+}
+
+.new-loan-user-card:hover {
+  border-color: var(--color-primary-200);
+  background: var(--color-primary-50);
+}
+
+.new-loan-user-card--selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary-50);
+  box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.1);
+}
+
+.new-loan-user-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.new-loan-user-card__name {
+  display: block;
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: var(--text-base);
+}
+
+.new-loan-user-card__email {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+/* --- User info / warnings --- */
+
+.new-loan-user-info {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.new-loan-user-info__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.new-loan-user-info__row:last-child {
+  margin-bottom: 0;
+}
+
+.new-loan-user-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  margin-top: var(--space-3);
+}
+
+.new-loan-user-warning--error {
+  background: rgba(230, 57, 70, 0.08);
+  color: var(--color-danger);
+  border: 1px solid rgba(230, 57, 70, 0.2);
+}
+
+.new-loan-user-warning svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* --- Book grid --- */
+
+.new-loan-book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.new-loan-book-skeleton {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.new-loan-book-wrapper {
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.new-loan-book-wrapper:hover {
+  border-color: var(--color-primary-200);
+}
+
+.new-loan-book-wrapper--selected {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.1);
+}
+
+/* --- Copy selection --- */
+
+.new-loan-copies {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.new-loan-copies__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.new-loan-copies__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.new-loan-copy-btn {
+  padding: var(--space-2) var(--space-3);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  font-size: var(--text-sm);
+  font-family: var(--font-mono, monospace);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.new-loan-copy-btn:hover {
+  border-color: var(--color-primary-200);
+  background: var(--color-primary-50);
+}
+
+.new-loan-copy-btn--selected {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* --- Summary --- */
+
+.new-loan-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.new-loan-summary__section {
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.new-loan-summary__section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.new-loan-summary__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--space-3) 0;
+}
+
+.new-loan-summary__user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.new-loan-summary__book {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.new-loan-summary__book-cover {
+  width: 56px;
+  height: 75px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.new-loan-summary__book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.new-loan-summary__book-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
+.new-loan-summary__name {
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.new-loan-summary__meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: 2px 0 0;
+}
+
+.new-loan-summary__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.new-loan-summary__detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
+}
+
+.new-loan-summary__label {
+  color: var(--color-text-secondary);
+}
+
+.new-loan-summary__due-date {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.new-loan-summary__note {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+/* --- Error --- */
+
+.new-loan-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: rgba(230, 57, 70, 0.08);
+  border: 1px solid rgba(230, 57, 70, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+  margin-top: var(--space-4);
+}
+
+.new-loan-error svg {
+  flex-shrink: 0;
+}
+
+/* --- Empty state --- */
+
+.new-loan-empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  padding: var(--space-8) 0;
+}
+
+/* --- Success view --- */
+
+.new-loan-success {
+  text-align: center;
+  padding: var(--space-10) var(--space-6);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.new-loan-success__icon {
+  color: var(--color-success);
+  margin-bottom: var(--space-4);
+}
+
+.new-loan-success__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-text);
+  margin: 0 0 var(--space-3) 0;
+}
+
+.new-loan-success__text {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-6) 0;
+  line-height: 1.6;
+}
+
+.new-loan-success__details {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  margin-bottom: var(--space-6);
+  text-align: left;
+}
+
+.new-loan-success__detail {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.new-loan-success__detail:last-child {
+  border-bottom: none;
+}
+
+.new-loan-success__label {
+  color: var(--color-text-muted);
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 768px) {
+  .new-loan-page {
+    padding: var(--space-4);
+  }
+
+  .new-loan-steps {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .new-loan-steps__line {
+    width: 2px;
+    height: 24px;
+    margin-right: 0;
+  }
+
+  .new-loan-steps__item {
+    flex-direction: column;
+  }
+
+  .new-loan-book-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .new-loan-step__actions {
+    flex-direction: column-reverse;
+  }
+
+  .new-loan-step__actions .btn {
+    width: 100%;
+  }
+}

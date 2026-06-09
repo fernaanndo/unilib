@@ -1,0 +1,159 @@
+/* ============================================
+   SettingsPage — UNILIB Digital
+   System configuration cards
+   ============================================ */
+
+.settings-page {
+  padding: var(--space-6);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ─── Header ─── */
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.settings-header h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.settings-header svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* ─── Card ─── */
+
+.settings-card {
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-6);
+  overflow: hidden;
+}
+
+.settings-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+}
+
+.settings-card__header h2 {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.settings-card__header svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.settings-card__body {
+  padding: var(--space-6);
+}
+
+.settings-card__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-light);
+}
+
+/* ─── Role groups ─── */
+
+.settings-role-group {
+  margin-bottom: var(--space-6);
+}
+
+.settings-role-group:last-of-type {
+  margin-bottom: 0;
+}
+
+.settings-role-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 var(--space-3) 0;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px dashed var(--color-border-light);
+}
+
+/* ─── Fields row ─── */
+
+.settings-fields-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.settings-fields-row--single {
+  grid-template-columns: 1fr;
+  max-width: 400px;
+}
+
+/* ─── System info grid ─── */
+
+.settings-system-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.settings-system-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.settings-system-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.settings-system-value {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* ─── Responsive ─── */
+
+@media (max-width: 768px) {
+  .settings-page {
+    padding: var(--space-4);
+  }
+
+  .settings-card__header {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .settings-card__body {
+    padding: var(--space-4);
+  }
+
+  .settings-fields-row {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-system-grid {
+    grid-template-columns: 1fr;
+  }
+}

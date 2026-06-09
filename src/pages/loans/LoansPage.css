@@ -1,0 +1,104 @@
+/* ============================================
+   LoansPage — UNILIB Digital
+   Loan management with tabs + table
+   ============================================ */
+
+.loans-page {
+  padding: var(--space-6);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Header --- */
+
+.loans-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.loans-header h1 {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* --- Search --- */
+
+.loans-search {
+  margin-bottom: var(--space-5);
+  max-width: 480px;
+}
+
+/* --- Tabs --- */
+
+.loans-tabs {
+  margin-bottom: var(--space-6);
+}
+
+/* --- User cell --- */
+
+.loans-user-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.loans-user-name {
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+/* --- Actions --- */
+
+.loans-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.loans-actions .btn {
+  white-space: nowrap;
+}
+
+/* --- Table --- */
+
+.loans-table {
+  margin-bottom: var(--space-6);
+}
+
+/* Overdue row tinting */
+.loans-table .data-table__row--overdue {
+  background-color: rgba(230, 57, 70, 0.05);
+}
+
+.loans-table .data-table__row--overdue:hover {
+  background-color: rgba(230, 57, 70, 0.08);
+}
+
+/* --- Pagination --- */
+
+.loans-pagination {
+  margin-top: var(--space-4);
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 768px) {
+  .loans-page {
+    padding: var(--space-4);
+  }
+
+  .loans-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .loans-search {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,59 @@
+/* ============================================
+   LoadingSkeleton
+   ============================================ */
+
+.skeleton {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-muted) 25%,
+    var(--color-border-light) 50%,
+    var(--color-bg-muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* — Text: horizontal lines — */
+.skeleton--text {
+  height: 1em;
+  width: 100%;
+  margin-bottom: var(--space-2);
+}
+
+.skeleton--text:last-child {
+  width: 70%;
+}
+
+/* — Card: rounded rectangle — */
+.skeleton--card {
+  height: 160px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-3);
+}
+
+/* — Table row — */
+.skeleton--table-row {
+  height: 48px;
+  width: 100%;
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+/* — Circle — */
+.skeleton--circle {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

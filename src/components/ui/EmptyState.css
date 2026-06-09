@@ -1,0 +1,62 @@
+/* ============================================
+   EmptyState
+   ============================================ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-12) var(--space-8);
+  gap: var(--space-3);
+}
+
+/* — Icon — */
+.empty-state__icon {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+  opacity: 0.6;
+}
+
+/* — Title — */
+.empty-state__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* — Message — */
+.empty-state__message {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+/* — Actions — */
+.empty-state__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+/* — Clear filters link — */
+.empty-state__clear {
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast);
+}
+
+.empty-state__clear:hover {
+  color: var(--color-primary-light);
+}

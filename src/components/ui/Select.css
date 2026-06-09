@@ -1,0 +1,101 @@
+/* ============================================
+   Select
+   ============================================ */
+
+.select-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* — Label — */
+.select-field__label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.select-field__required {
+  color: var(--color-danger);
+  margin-left: 2px;
+}
+
+/* — Wrapper — */
+.select-field__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* — Select — */
+.select-field__select {
+  width: 100%;
+  padding: var(--space-2) var(--space-8) var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  appearance: none;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  min-height: 40px;
+}
+
+.select-field__select:hover:not(:disabled) {
+  border-color: var(--color-text-muted);
+}
+
+.select-field__select:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px var(--color-primary-50);
+}
+
+.select-field__select:disabled {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+/* — Chevron — */
+.select-field__chevron {
+  position: absolute;
+  right: var(--space-3);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+/* — Error state — */
+.select-field--error .select-field__select {
+  border-color: var(--color-danger);
+}
+
+.select-field--error .select-field__select:focus {
+  box-shadow: 0 0 0 3px var(--color-danger-light);
+}
+
+.select-field__error {
+  font-size: var(--text-xs);
+  color: var(--color-danger);
+  margin-top: var(--space-1);
+}
+
+/* — Helper text — */
+.select-field__helper {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+/* — Disabled wrapper — */
+.select-field--disabled .select-field__label {
+  color: var(--color-text-muted);
+}
+
+.select-field--disabled .select-field__chevron {
+  opacity: 0.5;
+}
