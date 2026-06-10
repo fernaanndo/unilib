@@ -228,6 +228,7 @@
 /* -- List info -- */
 .book-card__list-info {
   min-width: 0;
+  overflow: hidden;
 }
 
 .book-card__title--list {
