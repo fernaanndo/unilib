@@ -17,7 +17,9 @@ export default function BookCard({ book, onClick, view = 'grid' }) {
   const availabilityText =
     availabilityStatus === 'none'
       ? 'No disponible'
-      : `${disponibles} de ${totalEjemplares} disponibles`;
+      : availabilityStatus === 'full'
+        ? 'Disponible'
+        : `${disponibles} de ${totalEjemplares} disponibles`;
 
   const availabilityPercent =
     totalEjemplares > 0 ? (disponibles / totalEjemplares) * 100 : 0;
@@ -55,7 +57,7 @@ export default function BookCard({ book, onClick, view = 'grid' }) {
           <span className="book-card__badge">{categoria}</span>
         )}
 
-        <div className={`book-card__availability book-card__availability--${availabilityStatus}`}>
+        <div className={`book-card__availability book-card__availability--${availabilityStatus}`} role="status" aria-label={`Estado: ${availabilityText}`}>
           <span className="book-card__availability-text">{availabilityText}</span>
         </div>
       </div>
@@ -98,8 +100,8 @@ export default function BookCard({ book, onClick, view = 'grid' }) {
         {anio && <span className="book-card__year">{anio}</span>}
 
         <div className="book-card__footer">
-          <div className={`book-card__availability book-card__availability--${availabilityStatus}`}>
-            <div className="book-card__bar-track">
+          <div className={`book-card__availability book-card__availability--${availabilityStatus}`} role="status" aria-label={`Estado: ${availabilityText}`}>
+            <div className="book-card__bar-track" aria-hidden="true">
               <div
                 className="book-card__bar-fill"
                 style={{ width: `${availabilityPercent}%` }}
