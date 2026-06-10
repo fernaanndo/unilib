@@ -15,11 +15,9 @@ export default function BookCard({ book, onClick, view = 'grid' }) {
   })();
 
   const availabilityText =
-    availabilityStatus === 'none'
+    disponibles === 0
       ? 'No disponible'
-      : availabilityStatus === 'full'
-        ? 'Disponible'
-        : `${disponibles} de ${totalEjemplares} disponibles`;
+      : `${disponibles} disponible${disponibles > 1 ? 's' : ''}`;
 
   const availabilityPercent =
     totalEjemplares > 0 ? (disponibles / totalEjemplares) * 100 : 0;
