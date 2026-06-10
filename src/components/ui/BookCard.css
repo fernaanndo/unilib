@@ -174,9 +174,10 @@
 
 /* ---- List view ---- */
 .book-card--list {
-  display: flex;
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
   background: var(--color-surface);
   border: 1px solid var(--color-border-light);
@@ -225,7 +226,6 @@
 
 /* -- List info -- */
 .book-card__list-info {
-  flex: 1;
   min-width: 0;
 }
 
@@ -235,15 +235,20 @@
   -webkit-line-clamp: 1;
 }
 
+.book-card--list .book-card__author {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Hide category badge in list view */
+.book-card--list .book-card__badge {
+  display: none;
+}
+
 /* -- List availability -- */
 .book-card--list .book-card__availability {
   flex-shrink: 0;
   text-align: right;
-}
-
-/* -- Responsive -- */
-@media (max-width: 640px) {
-  .book-card--list .book-card__badge {
-    display: none;
-  }
+  white-space: nowrap;
 }
