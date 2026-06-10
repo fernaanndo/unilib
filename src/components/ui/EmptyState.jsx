@@ -1,4 +1,5 @@
 import { Inbox } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Button from './Button';
 import './EmptyState.css';
 
@@ -9,8 +10,11 @@ export default function EmptyState({
   actionLabel,
   onAction,
   onClearFilters,
+  showBackHome = false,
   className = '',
 }) {
+  const navigate = useNavigate();
+
   return (
     <div className={`empty-state ${className}`}>
       <div className="empty-state__icon" aria-hidden="true">
@@ -21,7 +25,7 @@ export default function EmptyState({
 
       <p className="empty-state__message">{message}</p>
 
-      {(actionLabel || onClearFilters) && (
+      {(actionLabel || onClearFilters || showBackHome) && (
         <div className="empty-state__actions">
           {actionLabel && onAction && (
             <Button variant="primary" onClick={onAction}>
@@ -35,6 +39,15 @@ export default function EmptyState({
               type="button"
             >
               Limpiar filtros
+            </button>
+          )}
+          {showBackHome && (
+            <button
+              className="empty-state__clear"
+              onClick={() => navigate('/')}
+              type="button"
+            >
+              Volver al inicio
             </button>
           )}
         </div>
