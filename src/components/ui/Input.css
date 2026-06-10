@@ -18,6 +18,8 @@
 .input-field__required {
   color: var(--color-danger);
   margin-left: 2px;
+  font-weight: 700;
+  font-size: 1em;
 }
 
 /* — Wrapper — */
