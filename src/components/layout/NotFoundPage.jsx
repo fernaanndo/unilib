@@ -8,9 +8,9 @@ export default function NotFoundPage() {
       <div className="error-page-content">
         <BookX size={56} className="error-page-icon" />
         <h1 className="error-page-code">404</h1>
-        <p className="error-page-message">Pagina no encontrada</p>
+        <p className="error-page-message">Página no encontrada</p>
         <p className="error-page-hint">
-          La pagina que buscas no existe o ha sido movida.
+          La página que buscas no existe o ha sido movida.
         </p>
         <Link to="/" className="error-page-link">
           Volver al inicio
