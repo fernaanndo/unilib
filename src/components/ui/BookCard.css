@@ -165,7 +165,7 @@
 }
 
 .book-card__availability--partial .book-card__availability-text {
-  color: var(--color-warning);
+  color: #8a5a1e;
 }
 
 .book-card__availability--none .book-card__availability-text {
