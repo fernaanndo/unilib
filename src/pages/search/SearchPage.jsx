@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Search, SearchX, LayoutGrid, List, SlidersHorizontal } from 'lucide-react';
+import { SearchX, LayoutGrid, List, SlidersHorizontal, X } from 'lucide-react';
 import SearchBar from '../../components/ui/SearchBar';
 import BookCard from '../../components/ui/BookCard';
 import FilterPanel from '../../components/ui/FilterPanel';
@@ -33,6 +33,7 @@ export default function SearchPage() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Sync state to URL
   const syncParams = useCallback((overrides = {}) => {
@@ -128,8 +129,21 @@ export default function SearchPage() {
         </div>
       </section>
 
+      {/* Mobile filter toggle */}
+      <button
+        type="button"
+        className="search-page__filter-toggle"
+        onClick={() => setFiltersOpen((v) => !v)}
+        aria-expanded={filtersOpen}
+        aria-controls="search-filters"
+      >
+        <SlidersHorizontal size={16} />
+        <span>Filtros</span>
+        {hasActiveFilters && <span className="search-page__filter-badge" aria-label="Filtros activos" />}
+      </button>
+
       {/* Filter bar */}
-      <FilterPanel className="search-page__filters">
+      <FilterPanel className={`search-page__filters ${filtersOpen ? 'search-page__filters--open' : ''}`} id="search-filters">
         <div className="search-page__filter-row">
           {/* Category chips */}
           <div className="search-page__chips-wrapper">
@@ -257,8 +271,9 @@ export default function SearchPage() {
           <EmptyState
             icon={SearchX}
             title="Sin resultados"
-            message="No se encontraron materiales que coincidan con su b&uacute;squeda."
+            message="No se encontraron materiales que coincidan con su búsqueda. Intente con otros términos."
             onClearFilters={hasActiveFilters ? handleClearFilters : undefined}
+            showBackHome
           />
         )}
       </section>
