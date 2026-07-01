@@ -30,14 +30,14 @@ export function AuthProvider({ children }) {
   // Restore session on mount
   useEffect(() => {
     try {
-      const stored = sessionStorage.getItem(SESSION_KEY)
+      const stored = localStorage.getItem(SESSION_KEY)
       if (stored) {
         const parsed = JSON.parse(stored)
         setUser(parsed)
         lastActivity.current = Date.now()
       }
     } catch {
-      sessionStorage.removeItem(SESSION_KEY)
+      localStorage.removeItem(SESSION_KEY)
     }
   }, [])
 
@@ -48,7 +48,7 @@ export function AuthProvider({ children }) {
     const interval = setInterval(() => {
       const elapsed = Date.now() - lastActivity.current
       if (elapsed >= INACTIVITY_LIMIT) {
-        sessionStorage.removeItem(SESSION_KEY)
+        localStorage.removeItem(SESSION_KEY)
         setUser(null)
         navigate('/login')
       }
@@ -90,7 +90,7 @@ export function AuthProvider({ children }) {
     if (!found) return false
 
     const sessionUser = { ...found }
-    sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessionUser))
+    localStorage.setItem(SESSION_KEY, JSON.stringify(sessionUser))
     setUser(sessionUser)
     lastActivity.current = Date.now()
 
@@ -100,7 +100,7 @@ export function AuthProvider({ children }) {
   }, [navigate])
 
   const logout = useCallback(() => {
-    sessionStorage.removeItem(SESSION_KEY)
+    localStorage.removeItem(SESSION_KEY)
     setUser(null)
     navigate('/login')
   }, [navigate])
