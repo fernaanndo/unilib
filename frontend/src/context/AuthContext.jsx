@@ -23,23 +23,28 @@ const AuthContext = createContext({
 })
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const lastActivity = useRef(Date.now())
-  const navigate = useNavigate()
-
-  // Restore session on mount
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
     try {
-      const stored = localStorage.getItem(SESSION_KEY)
-      if (stored) {
-        const parsed = JSON.parse(stored)
-        setUser(parsed)
-        lastActivity.current = Date.now()
+      // Auto-login por parámetro de URL (para escáneres de accesibilidad como BrowserStack).
+      // Cada página se autentica sola al cargar, sin depender de una sesión previa.
+      const demoEmail = new URLSearchParams(window.location.search).get('demo_login')
+      if (demoEmail) {
+        const viaUrl = DEMO_USERS.find((u) => u.email === demoEmail)
+        if (viaUrl) {
+          localStorage.setItem(SESSION_KEY, JSON.stringify(viaUrl))
+          return viaUrl
+        }
       }
+      // Restaurar sesión existente
+      const stored = localStorage.getItem(SESSION_KEY)
+      if (stored) return JSON.parse(stored)
     } catch {
       localStorage.removeItem(SESSION_KEY)
     }
-  }, [])
+    return null
+  })
+  const lastActivity = useRef(Date.now())
+  const navigate = useNavigate()
 
   // Inactivity timeout
   useEffect(() => {
